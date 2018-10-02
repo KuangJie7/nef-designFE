@@ -1,0 +1,28 @@
+#app {
+  .ivu-form-item{
+    margin-bottom: 50px;
+  }
+  .ivu-input {
+    border-radius: 0;
+    border: none;
+    border-bottom: solid 1px #D8D8D8;
+    &:hover{
+      border-bottom: solid 1px #69707A;
+    }
+    &:focus{
+      border-color: #69707A;
+      box-shadow: none;
+    }
+  }
+  .ivu-form-item-error .ivu-input{
+    border: none;
+    border-bottom: solid 1px #F67369;
+    &:focus{
+      border-color: #F67369;
+      box-shadow: none;
+    }
+  }
+  .ivu-form-item-error-tip{
+    color: #F67369;
+  }
+}
