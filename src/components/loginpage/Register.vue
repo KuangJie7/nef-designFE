@@ -1,7 +1,7 @@
 <template>
 <div class="register-page">
   <div class="register-page-box-wrap">
-    <router-link to="/login">
+    <router-link to="/user/login">
       <img src="./back-to-homepage-small.png" class="back-button"/>
     </router-link>
     <div class="register-page-description">
@@ -28,15 +28,13 @@
             <Input type="password" v-model="formInline.password" placeholder="设置8-16位字符的登录密码" />
           </FormItem>
           <FormItem>
-              <div class="register-button" @click="handleSubmit('formInline')">
-                <p class="register-text">注册为 Nef.Design 用户</p>
-              </div>
+            <OpButton btnText="注册为 Nef.Design 用户" btnWidth="360" btnHeight="55" v-on:wrapClick="handleSubmit('formInline')" />
           </FormItem>
       </Form>
     </div>
     <div class="login-box">
         <span class="login-tip">已有账号？</span>
-        <router-link to="/login">立即登录</router-link>
+        <router-link to="/user/login">立即登录</router-link>
     </div>
   </div>
 </div>
@@ -46,11 +44,13 @@
 import Vue from "vue";
 import { Form, Input, FormItem, Icon } from "iview";
 import api from "../../api.js";
+import OpButton from '../global/OpButton.vue'
 
 Vue.component("Form", Form);
 Vue.component("FormItem", FormItem);
 Vue.component("Input", Input);
 Vue.component("Icon", Icon);
+Vue.component('OpButton',OpButton)
 
 export default {
   name: "register",
@@ -105,9 +105,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-@primary-text-color: #aeb1b5;
-@primary-text-color-highlight: #deba6c;
-@label-text-color: #69707a;
+@import url('../../assets/css/global.less');
 .register-page {
   height: 100%;
   display: grid;
@@ -154,29 +152,7 @@ export default {
         top: 238px;
         cursor: pointer;
       }
-      .register-button {
-        width: 360px;
-        height: 55px;
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(
-          15deg,
-          rgba(105, 112, 122, 1) 0%,
-          rgba(141, 148, 158, 1) 100%
-        );
-        box-shadow: 5px 5px 8px 0px rgba(107, 122, 144, 0.38);
-        border-radius: 10px;
-        cursor: pointer;
-
-        .register-text {
-          font-size: 18px;
-          color: rgba(255, 255, 255, 1);
-          letter-spacing: 2px;
-        }
       }
-    }
 
     .login-box {
       font-size: 16px;

@@ -16,19 +16,17 @@
           <FormItem prop="password">
             <Input type="password" v-model="formInline.password" placeholder="输入您设置的登录密码" />
           </FormItem>
-          <router-link to="password_find">
+          <router-link to="/user/password_find">
             <div class="forget-password-text"><span>忘记密码</span></div>
           </router-link>
           <FormItem>
-              <div class="login-button" @click="handleSubmit('formInline')">
-                <p class="login-text">登录到 Nef.Design</p>
-              </div>
+            <OpButton btnText="登录到 Nef.Design" btnWidth="360" btnHeight="55" v-on:wrapClick="handleSubmit('formInline')" />
           </FormItem>
       </Form>
     </div>
     <div class="register-box">
         <span class="register-tip">还没有账号？</span>
-        <router-link to="/register">立即注册</router-link>
+        <router-link to="/user/register">立即注册</router-link>
     </div>
   </div>
 </div>
@@ -37,12 +35,14 @@
 <script>
 import Vue from "vue";
 import { Form, Input, FormItem, Icon } from "iview";
+import OpButton from '../global/OpButton.vue'
 import api from "../../api.js";
 
 Vue.component("Form", Form);
 Vue.component("FormItem", FormItem);
 Vue.component("Input", Input);
 Vue.component("Icon", Icon);
+Vue.component('OpButton',OpButton)
 
 export default {
   name: "login",
@@ -80,12 +80,19 @@ export default {
   },
   methods: {
     handleSubmit(name) {
+      console.log(this);
+      let self = this;
       this.$refs[name].validate(valid => {
         if (valid) {
           //发送账户和密码
-          this.$Message.success("Success!");
+          console.log('123');
+          self.$Message.success({
+            content: 'success',
+            duration: 3,
+            top: 60
+          });
         } else {
-          this.$Message.error("登录失败");
+          self.$Message.error("登录失败");
         }
       });
     },
@@ -98,9 +105,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
-@primary-text-color: #aeb1b5;
-@primary-text-color-highlight: #deba6c;
-@label-text-color: #69707a;
+@import url('../../assets/css/global.less');
 .login-page {
   height: 100%;
   display: grid;
@@ -146,28 +151,6 @@ export default {
         top: -20px;
         span{
           cursor: pointer;
-        }
-      }
-      .login-button {
-        width: 360px;
-        height: 55px;
-        margin-top: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(
-          15deg,
-          rgba(105, 112, 122, 1) 0%,
-          rgba(141, 148, 158, 1) 100%
-        );
-        box-shadow: 5px 5px 8px 0px rgba(107, 122, 144, 0.38);
-        border-radius: 10px;
-        cursor: pointer;
-
-        .login-text {
-          font-size: 18px;
-          color: rgba(255, 255, 255, 1);
-          letter-spacing: 2px;
         }
       }
     }
